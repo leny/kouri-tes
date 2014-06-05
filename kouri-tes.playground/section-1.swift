@@ -42,5 +42,93 @@ occupations[ "McCoy" ] = "Doctor"
 let emptyArrayOfStrings = String[]() // or []
 let emptyDictionnaryOfFloats = Dictionary<String, Float>() // or [:]
 
+// --- Control Flow
 
+// for in
 
+let individualScores = [ 75, 43, 103, 87, 12 ]
+var teamScore = 0
+for score in individualScores {
+    if score > 50 {
+        teamScore += 3
+    } else {
+        teamScore += 1
+    }
+}
+
+// optional-value variables
+
+var optionalString:String? = "Hello"
+optionalString = nil
+
+var optionalName:String? = "Doctor"
+// optionalName = nil
+var greeting:String
+if let name = optionalName {
+    greeting = "Hello, \( name )"
+} else {
+    greeting = "Hello, world!"
+}
+
+// switch
+
+let vegetable = "red pepper"
+switch vegetable {
+    case "celery":
+        let vegetableComment = "Add some raisins and make ants on a log."
+    case "cucumber", "watercress":
+        let vegetableComment = "That would make a good tea sandwich."
+    case let x where x.hasSuffix( "pepper" ):
+        let vegetableComment = "Is it a spicy \( x ) ?"
+    default:
+        let vegetableComment = "Everything tastes good in soup."
+}
+
+// iterate over a dictionary
+
+let interestingNumbers = [
+    "Prime": [ 2, 3, 5, 7, 11, 13 ],
+    "Fibonacci": [ 1, 1, 2, 3, 5, 8 ],
+    "Square": [ 1, 4, 9, 16, 25 ]
+]
+var largest = 0
+var largestKind = "none"
+for ( kind, numbers ) in interestingNumbers {
+    for number in numbers {
+        if number > largest {
+            largest = number
+            largestKind = kind
+        }
+    }
+}
+largest
+largestKind
+
+// whiles
+
+var n = 2
+while n < 100 {
+    n *= 2
+}
+n
+
+var m = 2
+
+do {
+    m *= 2
+} while m < 100
+m
+
+// ranges in for loops
+
+var rangedNumberExclusive = 0
+for i in 0..5 {
+    rangedNumberExclusive += i
+}
+rangedNumberExclusive
+
+var rangedNumberInclusive = 0
+for i in 0...5 {
+    rangedNumberInclusive += i
+}
+rangedNumberInclusive
