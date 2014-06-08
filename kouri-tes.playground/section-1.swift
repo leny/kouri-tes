@@ -132,3 +132,86 @@ for i in 0...5 {
     rangedNumberInclusive += i
 }
 rangedNumberInclusive
+
+// --- Functions and Closures
+
+func greet( name:String, day:String ) -> String {
+    return "Hello \( name ), today is \( day )."
+}
+greet( "Captain Kirk", "monday" )
+
+// multiple returns
+
+func getGasPrices() -> (Double, Double, Double) {
+    return ( 3.59, 3.69, 3.79 );
+}
+getGasPrices()
+
+// splats
+
+func sumOf( numbers:Int... ) -> Int {
+    var sum = 0
+    for number in numbers {
+        sum += number
+    }
+    return sum
+}
+sumOf()
+sumOf( 1, 2, 3, 4, 5 )
+
+func avgOf( numbers:Int... ) -> Double {
+    var sum:Double = 0
+    let amount = Double( numbers.count )
+    for number in numbers {
+        sum += Double( number )
+    }
+    return sum / amount
+}
+avgOf( 1, 2, 3, 4, 5 )
+
+// nested, and first-class typed functions
+
+func returnFifteen() -> Int {
+    var y = 10
+    func add() {
+        y += 5
+    }
+    add()
+    return y
+}
+returnFifteen()
+
+func makeIncrementer() -> ( Int -> Int ) {
+    func addOne( number:Int ) -> Int {
+        return 1 + number
+    }
+    return addOne
+}
+var increment = makeIncrementer()
+increment( 7 )
+
+func hasAnyMatches( list:Int[], condition:Int -> Bool ) -> Bool {
+    for item in list {
+        if condition( item ) {
+            return true
+        }
+    }
+    return false
+}
+func lessThanTen( number:Int ) -> Bool {
+    return number < 10
+}
+var numbers = [ 20, 19, 7, 12 ]
+hasAnyMatches( numbers, lessThanTen )
+
+// closures
+
+numbers.map( {
+    ( number:Int ) -> Int in
+        let result = 3 * number
+        return result
+} )
+
+numbers.map( { number in 3 * number } )
+
+sort( [ 1, 5, 3, 12, 2 ] ) { $0 > $1 }
